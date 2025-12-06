@@ -90,6 +90,8 @@
         &.desc-bottom,
         &.desc-top {
             flex-direction: column;
+            padding-top: 20px;
+            padding-bottom: 20px;
         }
 
         &.desc-left,
