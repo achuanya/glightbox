@@ -643,7 +643,7 @@ let customSlideHTML = `<div class="gslide">
             </div>
             <div class="gslide-description">
                 <div class="gdesc-inner">
-                    <h4 class="gslide-title"></h4>
+                    <span class="gslide-title"></span>
                     <div class="gslide-desc"></div>
                 </div>
             </div>
