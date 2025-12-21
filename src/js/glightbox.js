@@ -4,7 +4,6 @@
  * made by https://www.biati.digital
  * Github: https://github.com/biati-digital/glightbox
  */
-
 import keyboardNavigation from './core/keyboard-navigation.js';
 import Slide from './core/slide.js';
 import touchNavigation from './core/touch-navigation.js';
@@ -38,7 +37,7 @@ const defaults = {
     onOpen: null,
     onClose: null,
     loop: false,
-    zoomable: true,
+    zoomable: false,
     draggable: true,
     dragAutoSnap: false,
     dragToleranceX: 40,
@@ -49,6 +48,7 @@ const defaults = {
     touchFollowAxis: true,
     keyboardNavigation: true,
     closeOnOutsideClick: true,
+    lockBodyScroll: false,
     plugins: false,
     plyr: {
         css: 'https://cdn.plyr.io/3.6.12/plyr.css',
@@ -70,6 +70,7 @@ const defaults = {
             }
         }
     },
+    
     openEffect: 'zoom', // fade, zoom, none
     closeEffect: 'zoom', // fade, zoom, none
     slideEffect: 'slide', // fade, slide, zoom, none
@@ -187,18 +188,20 @@ class GlightboxInit {
 
         const body = document.body;
 
-        const scrollBar = window.innerWidth - document.documentElement.clientWidth;
-        if (scrollBar > 0) {
-            var styleSheet = document.createElement('style');
-            styleSheet.type = 'text/css';
-            styleSheet.className = 'gcss-styles';
-            styleSheet.innerText = `.gscrollbar-fixer {margin-right: ${scrollBar}px}`;
-            document.head.appendChild(styleSheet);
-            _.addClass(body, 'gscrollbar-fixer');
-        }
+        if (this.settings.lockBodyScroll) {
+            const scrollBar = window.innerWidth - document.documentElement.clientWidth;
+            if (scrollBar > 0) {
+                var styleSheet = document.createElement('style');
+                styleSheet.type = 'text/css';
+                styleSheet.className = 'gcss-styles';
+                styleSheet.innerText = `.gscrollbar-fixer {margin-right: ${scrollBar}px}`;
+                document.head.appendChild(styleSheet);
+                _.addClass(body, 'gscrollbar-fixer');
+            }
 
-        _.addClass(body, 'glightbox-open');
-        _.addClass(html, 'glightbox-open');
+            _.addClass(body, 'glightbox-open');
+            _.addClass(html, 'glightbox-open');
+        }
         if (isMobile) {
             _.addClass(document.body, 'glightbox-mobile');
             this.settings.slideEffect = 'slide';

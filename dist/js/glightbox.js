@@ -2056,7 +2056,7 @@
     onOpen: null,
     onClose: null,
     loop: false,
-    zoomable: true,
+    zoomable: false,
     draggable: true,
     dragAutoSnap: false,
     dragToleranceX: 40,
@@ -2067,6 +2067,7 @@
     touchFollowAxis: true,
     keyboardNavigation: true,
     closeOnOutsideClick: true,
+    lockBodyScroll: false,
     plugins: false,
     plyr: {
       css: 'https://cdn.plyr.io/3.6.12/plyr.css',
@@ -2184,17 +2185,19 @@
         this.build();
         animateElement(this.overlay, this.settings.openEffect === 'none' ? 'none' : this.settings.cssEfects.fade["in"]);
         var body = document.body;
-        var scrollBar = window.innerWidth - document.documentElement.clientWidth;
-        if (scrollBar > 0) {
-          var styleSheet = document.createElement('style');
-          styleSheet.type = 'text/css';
-          styleSheet.className = 'gcss-styles';
-          styleSheet.innerText = ".gscrollbar-fixer {margin-right: ".concat(scrollBar, "px}");
-          document.head.appendChild(styleSheet);
-          addClass(body, 'gscrollbar-fixer');
+        if (this.settings.lockBodyScroll) {
+          var scrollBar = window.innerWidth - document.documentElement.clientWidth;
+          if (scrollBar > 0) {
+            var styleSheet = document.createElement('style');
+            styleSheet.type = 'text/css';
+            styleSheet.className = 'gcss-styles';
+            styleSheet.innerText = ".gscrollbar-fixer {margin-right: ".concat(scrollBar, "px}");
+            document.head.appendChild(styleSheet);
+            addClass(body, 'gscrollbar-fixer');
+          }
+          addClass(body, 'glightbox-open');
+          addClass(html, 'glightbox-open');
         }
-        addClass(body, 'glightbox-open');
-        addClass(html, 'glightbox-open');
         if (isMobile$1) {
           addClass(document.body, 'glightbox-mobile');
           this.settings.slideEffect = 'slide';

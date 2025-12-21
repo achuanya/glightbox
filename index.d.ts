@@ -166,6 +166,12 @@ declare namespace Glightbox {
          */
         closeOnOutsideClick?: boolean;
         /**
+         * Lock body scroll when lightbox opens
+         * 
+         * @default false
+         */
+        lockBodyScroll?: boolean;
+        /**
          * Start lightbox at defined index.
          * 
          * @default 0
@@ -204,7 +210,7 @@ declare namespace Glightbox {
         /**
          * Enable or disable zoomable images
          * 
-         * @default true
+         * @default false
          */
         zoomable?: boolean;
         /**
